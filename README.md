@@ -83,9 +83,9 @@ php artisan jwt:secret
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=api_mejoramiento
+DB_DATABASE=mini_drogueria
 DB_USERNAME=root
-DB_PASSWORD=tu_clave
+DB_PASSWORD=
 ```
 
 ---
