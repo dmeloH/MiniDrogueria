@@ -6,9 +6,9 @@ Este proyecto fue desarrollado como parte del plan de mejoramiento del programa 
 
 ## 👤 Información del Aprendiz
 
-- **Nombre:** Heady Daniela Melo Gordillo  
-- **Cédula:** 1018434287  
-- **Ficha de formación:** 2848170  
+- **Nombre:** Heady Daniela Melo Gordillo
+- **Cédula:** 1018434287
+- **Ficha de formación:** 2848170
 - **Centro de formación:** Centro Industrial de Mantenimiento y Manufactura – Duitama
 
 ---
@@ -26,11 +26,11 @@ Desarrollar una API funcional desde cero utilizando el framework Laravel, que pe
 
 ## 🧰 Tecnologías Utilizadas
 
-- Laravel 10.x  
-- PHP 8.x  
-- MySQL  
-- Composer  
-- Postman  
+- Laravel 10.x
+- PHP 8.x
+- MySQL
+- Composer
+- Postman
 
 ---
 
@@ -38,21 +38,20 @@ Desarrollar una API funcional desde cero utilizando el framework Laravel, que pe
 
 Se diseñaron cinco entidades con sus respectivas relaciones:
 
-1. **Empleados**  
-2. **Productos**  
-3. **Clientes**  
-4. **Ventas**  
-5. **Detalle_venta**
+1. **Empleados**
+2. **Productos**
+3. **Clientes**
+4. **Ventas**
+5. **Detalles del Pedido**
 
 ---
 
 ### 🔗 Relaciones entre Tablas
 
-- Un **cliente** puede tener muchas **ventas**.  
-- Un **producto** pertenece a un **proveedor**.  
-- Un **proveedor** tiene muchos **productos**.  
-- Un **producto** tiene muchos **detalles de ventas**.
-- Un **detalle de venta** pertenece a una **venta**.  
+- Un **usuario** puede tener muchos **pedidos**.
+- Un **producto** pertenece a una **categoría**.
+- Un **pedido** tiene muchos **detalles del pedido**.
+- Un **detalle del pedido** pertenece a un **producto** y a un **pedido**.
 
 ---
 
@@ -61,38 +60,49 @@ Se diseñaron cinco entidades con sus respectivas relaciones:
 ### 1. Crear Proyecto Laravel
 
 ```bash
-composer create-project laravel/laravel MiniDrogueria
-cd MiniDrogueria
+composer create-project laravel/laravel api-mejoramiento
+cd api-mejoramiento
+php artisan install api
 ```
 
 ---
 
-### 2. Configurar `.env`
+### 2.Instalacion de jwt
+
+```bash
+composer require tymon/jwt-auth
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+```
+
+---
+
+### 3. Configurar `.env`
 
 ```dotenv
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=minidrogueria
+DB_DATABASE=api_mejoramiento
 DB_USERNAME=root
 DB_PASSWORD=tu_clave
 ```
 
 ---
 
-### 3. Crear Migraciones y Modelos
+### 4. Crear Migraciones y Modelos
 
 ```bash
-php artisan make:model Cleintes -m
-php artisan make:model productos -m
-php artisan make:model ventas -m
-php artisan make:model detalle_venta -m
-php artisan make:model proveedor -m
+php artisan make:model Usuario -m
+php artisan make:model Categoria -m
+php artisan make:model Producto -m
+php artisan make:model Pedido -m
+php artisan make:model DetallePedido -m
 ```
 
 ---
 
-### 4. Ejecutar Migraciones
+### 5. Ejecutar Migraciones
 
 ```bash
 php artisan migrate
@@ -100,37 +110,38 @@ php artisan migrate
 
 ---
 
-### 5. Crear Controladores REST
+### 6. Crear Controladores REST
 
 ```bash
-php artisan make:controller ClienteController --api
-php artisan make:controller proveedorController --api
+php artisan make:controller UsuarioController --api
+php artisan make:controller CategoriaController --api
 php artisan make:controller ProductoController --api
-php artisan make:controller VentaController --api
-php artisan make:controller DetalleVentaController --api
+php artisan make:controller PedidoController --api
+php artisan make:controller DetallePedidoController --api
 ```
 
 ---
 
-### 6. Definir Rutas en `routes/api.php`
+### 7. Definir Rutas en `routes/api.php`
 
 ```php
-Route::apiResource('clientes', UsuarioController::class);
-Route::apiResource('proveedores', CategoriaController::class);
+Route::apiResource('usuarios', UsuarioController::class);
+Route::apiResource('categorias', CategoriaController::class);
 Route::apiResource('productos', ProductoController::class);
-Route::apiResource('ventas', PedidoController::class);
-Route::apiResource('detalle_ventas', DetallePedidoController::class);
+Route::apiResource('pedidos', PedidoController::class);
+Route::apiResource('detalle-pedidos', DetallePedidoController::class);
 ```
 
-## Clonación del proyecto 
+## Clonación del proyecto
+
 ```bash
-git clone https://github.com/dmeloH/MiniDrogueria.git
-cd MiniDrogueria
+git clone [url]
+cd nombre_del_proyecto
 composer install
-php artisan serve 
-php rourer list 
+php artisan serve
+php rourer list
 ```
-## Documentacion 
 
-Para generar la documentación de la API, se utilizó el paquete **Laravel Scramble**. Asegúrate de tenerlo instalado y configurado correctamente.
+## Documentdacion
+
 - Redirija en el navegador a la ruta **http://localhost/docs/api**
