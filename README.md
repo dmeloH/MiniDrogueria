@@ -124,12 +124,13 @@ Route::apiResource('detalle_ventas', DetallePedidoController::class);
 
 ## Clonación del proyecto 
 ```bash
-git clone [url]
-cd nombre_del_proyecto
+git clone https://github.com/dmeloH/MiniDrogueria.git
+cd MiniDrogueria
 composer install
 php artisan serve 
 php rourer list 
 ```
-## Documentdacion 
+## Documentacion 
 
+Para generar la documentación de la API, se utilizó el paquete **Laravel Scramble**. Asegúrate de tenerlo instalado y configurado correctamente.
 - Redirija en el navegador a la ruta **http://localhost/docs/api**
