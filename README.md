@@ -1,15 +1,15 @@
 # 📦 API REST - Sistema de Gestión de Farmacia
 
-Este proyecto fue desarrollado como parte del plan de mejoramiento del programa **Tecnólogo en Análisis y Desarrollo de Software** del SENA. El objetivo es demostrar habilidades en el desarrollo backend utilizando Laravel y aplicar buenas prácticas en la creación de APIs RESTful.
+Este proyecto fue desarrollado como parte del plan de mejoramiento del programa _Tecnólogo en Análisis y Desarrollo de Software_ del SENA. El objetivo es demostrar habilidades en el desarrollo backend utilizando Laravel y aplicar buenas prácticas en la creación de APIs RESTful.
 
 ---
 
 ## 👤 Información del Aprendiz
 
-- **Nombre:** Heady Daniela Melo Gordillo
-- **Cédula:** 1018434287
-- **Ficha de formación:** 2848170
-- **Centro de formación:** Centro Industrial de Mantenimiento y Manufactura – Duitama
+- _Nombre:_ Heady Daniela Melo Gordillo
+- _Cédula:_ 1018434287
+- _Ficha de formación:_ 2848170
+- _Centro de formación:_ Centro Industrial de Mantenimiento y Manufactura – Duitama
 
 ---
 
@@ -38,20 +38,21 @@ Desarrollar una API funcional desde cero utilizando el framework Laravel, que pe
 
 Se diseñaron cinco entidades con sus respectivas relaciones:
 
-1. **Empleados**
-2. **Productos**
-3. **Clientes**
-4. **Ventas**
-5. **Detalles del Pedido**
+1. _Empleados_
+2. _Productos_
+3. _Clientes_
+4. _Ventas_
+5. _Detalle_venta_
 
 ---
 
 ### 🔗 Relaciones entre Tablas
 
-- Un **usuario** puede tener muchos **pedidos**.
-- Un **producto** pertenece a una **categoría**.
-- Un **pedido** tiene muchos **detalles del pedido**.
-- Un **detalle del pedido** pertenece a un **producto** y a un **pedido**.
+- Un _cliente_ puede tener muchas _ventas_.
+- Un _producto_ pertenece a un _proveedor_.
+- Un _proveedor_ tiene muchos _productos_.
+- Un _producto_ tiene muchos _detalles de ventas_.
+- Un _detalle de venta_ pertenece a una _venta_.
 
 ---
 
@@ -83,9 +84,9 @@ php artisan jwt:secret
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=mini_drogueria
+DB_DATABASE=api_mejoramiento
 DB_USERNAME=root
-DB_PASSWORD=
+DB_PASSWORD=tu_clave
 ```
 
 ---
@@ -93,11 +94,11 @@ DB_PASSWORD=
 ### 4. Crear Migraciones y Modelos
 
 ```bash
-php artisan make:model Usuario -m
-php artisan make:model Categoria -m
-php artisan make:model Producto -m
-php artisan make:model Pedido -m
-php artisan make:model DetallePedido -m
+php artisan make:model Cleintes -m
+php artisan make:model productos -m
+php artisan make:model ventas -m
+php artisan make:model detalle_venta -m
+php artisan make:model proveedor -m
 ```
 
 ---
@@ -106,6 +107,7 @@ php artisan make:model DetallePedido -m
 
 ```bash
 php artisan migrate
+
 ```
 
 ---
@@ -113,35 +115,43 @@ php artisan migrate
 ### 6. Crear Controladores REST
 
 ```bash
-php artisan make:controller UsuarioController --api
-php artisan make:controller CategoriaController --api
+php artisan make:controller ClienteController --api
+php artisan make:controller proveedorController --api
 php artisan make:controller ProductoController --api
-php artisan make:controller PedidoController --api
-php artisan make:controller DetallePedidoController --api
+php artisan make:controller VentaController --api
+php artisan make:controller DetalleVentaController --api
 ```
 
 ---
 
-### 7. Definir Rutas en `routes/api.php`
+### 7. Definir Rutas en routes/api.php
 
 ```php
-Route::apiResource('usuarios', UsuarioController::class);
-Route::apiResource('categorias', CategoriaController::class);
+Route::apiResource('clientes', UsuarioController::class);
+Route::apiResource('proveedores', CategoriaController::class);
 Route::apiResource('productos', ProductoController::class);
-Route::apiResource('pedidos', PedidoController::class);
-Route::apiResource('detalle-pedidos', DetallePedidoController::class);
+Route::apiResource('ventas', PedidoController::class);
+Route::apiResource('detalle_ventas', DetallePedidoController::class);
+```
+
+### 8. Documentacion con scramble
+
+```bash
+composer require dedoc/scramble
+php artisan vendor:publish --provider="Dedoc\Scramble\ScrambleServiceProvider" --tag="scramble-config"
 ```
 
 ## Clonación del proyecto
 
-```bash
-git clone [url]
-cd nombre_del_proyecto
+bash
+git clone https://github.com/dmeloH/MiniDrogueria.git
+cd MiniDrogueria
 composer install
 php artisan serve
 php rourer list
-```
 
-## Documentdacion
+## Documentacion
 
-- Redirija en el navegador a la ruta **http://localhost/docs/api**
+Para generar la documentación de la API, se utilizó el paquete _Laravel Scramble_. Asegúrate de tenerlo instalado y configurado correctamente.
+
+- Redirija en el navegador a la ruta _http://localhost/docs/api_
