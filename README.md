@@ -49,7 +49,7 @@ Se diseñaron cinco entidades con sus respectivas relaciones:
 ### 🔗 Relaciones entre Tablas
 
 - Un **cliente** puede tener muchas **ventas**.  
-- Un **producto** pertenece a un **proveeodr**.  
+- Un **producto** pertenece a un **proveedor**.  
 - Un **proveedor** tiene muchos **productos**.  
 - Un **producto** tiene muchos **detalles de ventas**.
 - Un **detalle de venta** pertenece a una **venta**.  
