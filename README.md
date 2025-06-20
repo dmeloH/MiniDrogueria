@@ -61,8 +61,8 @@ Se diseñaron cinco entidades con sus respectivas relaciones:
 ### 1. Crear Proyecto Laravel
 
 ```bash
-composer create-project laravel/laravel api-mejoramiento
-cd api-mejoramiento
+composer create-project laravel/laravel MiniDrogueria
+cd MiniDrogueria
 ```
 
 ---
